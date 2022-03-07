@@ -66,7 +66,7 @@ def getMergedIntents(path):
             yamlFile, intent = getFileAndIntent(path, file)
             if yamlFile not in target_intent_dict:
               target_intent_dict[yamlFile] = intent
-            else if intent == "major":
+            elif intent == "major":
               target_intent_dict[yamlFile] = intent   
     return  target_intent_dict
 
