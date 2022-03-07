@@ -6,8 +6,6 @@ import yaml
 import git
 import json
 from json.decoder import JSONDecodeError
-import operator
-from stat import ST_CTIME
 
 
 def get_remote():
@@ -63,11 +61,12 @@ def getMergedIntents(path):
     all_files = os.listdir(path);
     for file in all_files:
         if file.endswith("intent.yml"):
-            yamlFile, intent = getFileAndIntent(path, file)
-            if yamlFile not in target_intent_dict:
-              target_intent_dict[yamlFile] = intent
-            elif intent == "major":
-              target_intent_dict[yamlFile] = intent   
+            intents = getFileAndIntent(path, file)
+            for yamlFile, intent in intents.items():
+                if yamlFile not in target_intent_dict:
+                  target_intent_dict[yamlFile] = intent
+                elif intent == "major":
+                  target_intent_dict[yamlFile] = intent   
     return  target_intent_dict
 
 feature_branch = str(sys.argv[1])
